@@ -546,7 +546,7 @@ empirical resting-state data for our proposed model.
 
 \textbf{Alternative benchmark model for comparison.} In order to put the
 proposed model in context, we also implemented for comparison a
-Wilson-Cowan neural mass model \cite{destexhe_wilson-cowan_2009,wilson_mathematical_1973,muldoon_stimulation-based_2016} with
+Wilson-Cowan neural mass model \cite{destexhe_wilson-cowan_2009,wilson_mathematical_1973,muldoon_stimulation-based_2016} (add criticism citation here) with
 similar dimensionality. Although NMMs like this can and have been
 implemented with regionally varying local parameters, here we enforced
 uniform, regionally non-varying local parameters, meaning all
@@ -562,3 +562,74 @@ not seek to explicitly evaluate a frequency response based on these
 delays.
 
 \subsection{Model Optimization}
+We computed \emph{maximum a posteriori} estimates for parameters under a
+flat non-informative prior. A simulated annealing optimization algorithm
+was used for estimation and provided a set of optimized parameters
+$\{\tau_{e}, \tau_{i}, \tau_{c}, g_{ei}, g_{ii}, \alpha, \upsilon\}$.
+We defined a data likelihood or goodness of fit (GOF) as the Pearson
+correlation between empirical source localized MEG power spectra and
+simulated model power spectra, averaged over all 68 regions of a
+subject's brain. The proposed model has only seven global parameters as
+compared to neural mass models with hundreds of parameters, and is
+available in closed-form. To improve the odds that we capture the global
+minimum, we chose to implement a probabilistic approach of simulated
+annealing \cite{Kirkpatrick1983}. The algorithm samples a set of
+parameters within a set of boundaries by generating an initial trial
+solution and choosing the next solution from the current point by a
+probability distribution with a scale depending on the current
+``temperature'' parameter. While the algorithm always accepts new trial
+points that map to cost-function values lower than the previous
+cost-function evaluations, it will also accept solutions that have
+cost-function evaluations greater than the previous one to move out of
+local minima. The acceptance probability function is
+$1/(1 + \frac{\mathrm{\Delta}}{e^{\max(T)}})$, where T is the current
+temperature and ∆ is the difference of the new minus old cost-function
+evaluations. The initial parameter values and boundary constraints for
+each parameter are given in Supplementary Table 1. All simulated
+annealing runs were allowed to iterate over the parameter space for a
+maximum of $N_{p} \times 3000$ iterations, where $N_{p}$ is the
+number of parameters in the model. As a comparison, we performed the
+same optimization procedure to a regionally non-varying Wilson-Cowan
+neural mass model \cite{wilson_mawilson_mathematical_1973,muldoon_stimulation-based_2016}.
+
+\section{Results}
+\subsecetion{Graph Laplacian eigenmodes mediate a diversity of frequency
+responses}
+
+First, we demonstrate the spectra produced by graph eigenmodes as per
+our theory using default choices of model parameters. Figure \ref{fig:sgmodel}C
+shows the eigen-spectrum of the complex Laplacian, with eigenvalue
+magnitude ranging from 0 to 1. The absolute value of eigenvalues of the
+complex Laplacian $\mathcal{L}(\omega)$ are plotted against the
+eigenvector index. Each dot represents one eigenvalue
+$\lambda(\omega)$; its color represents the frequency $\omega$ - low
+(blue) to high (yellow). Clearly, these eigenvalues change somewhat by
+frequency. Small eigenvalues undergo a larger shift due to frequency,
+while the large ones stay more stable and tightly clustered around the
+nominal eigenvalue (i.e. at $\omega = 0$). Each eigenmode produces a
+frequency response based on its frequency-dependent eigenvalue
+(Figure \ref{fig:sgmodel}D, E}). Figure \ref{fig:sgmodel}D shows the transit in the
+complex plane of a single eigenmode's frequency response, starting at
+low frequencies in the bottom right quadrant, and moving to the upper
+left quadrant at high frequencies. The magnitude, given by distance from
+origin, suggests that most eigenmodes have two prominent lobes, one
+roughly corresponding to lower frequency alpha rhythm and another
+corresponding to higher frequency beta or gamma rhythms, respectively.
+In contrast, the lowest few eigenmodes start off far from the origin,
+indicative of a low-pass response. The magnitude of these complex-valued
+curves shown in figure 1E reinforces these impressions, with clear alpha
+peak, as well as slower rhythms of the lowest eigenmodes. The spectral
+profile of the eigenmodes, especially the peak frequencies, are
+sensitive to the choice of model parameters as demonstrated below.
+
+The spatial patterns of the first 5 eigenmodes of
+$\mathcal{L}(\omega)$, evaluated at the alpha peak of 10 Hz, are shown
+in Figure \ref{fig:sgmodel}F. Eigenmodes
+$\mathbf{u}_{\mathbf{1 - 4}}$ produce posterior and temporal spatial
+patterns, including many elements of the \textbf{default mode network;}
+\(\mathbf{u}_{\mathbf{4}}\) resembles the \textbf{sensorimotor network};
+and \(\mathbf{u}_{5}\) the \textbf{structural core} of the human
+connectome. However, these patterns are not exclusive and greatly depend
+on the frequency at which they are evaluated, as well as the model
+parameters. Higher eigenmodes are especially sensitive to axonal
+velocity and frequency (not shown here).
