@@ -163,7 +163,7 @@ total:
 $\tau_{e}, \tau_{i}, \tau_{G}, v, g_{ii}, g_{ei}, \alpha$,
 which are all global and apply at every node. See Table \ref{tab:SGM_parameters} for
 their meaning, initial value and range. Note that the entire model is
-based on a single equation of graph dynamics, Eq (1), which is
+based on a single equation of graph dynamics, Eq \ref{eq:rate_model}, which is
 repeatedly applied to each level of the hierarchy. Here we used two
 levels: a mesoscopic level where connectivity is all-to-all, and a
 macroscopic level, where connectivity is measured from fiber
@@ -432,7 +432,7 @@ that $\mathbf{U}(\omega){\mathbf{U}(\omega)}^{H} = \mathbf{I}$. It
 can then be shown easily that
 
 \begin{equation}
-\label{sgm}
+\label{eq:sgm}
 \mathbf{X}(\omega) =\sum_{i}\frac{\mathbf{u}_{i}(\omega)\mathbf{u}_{i}^{H}(\omega)}{j\omega + \frac{1}{\tau_{G}}\lambda_{i}(\omega) F_{e}(\omega)} H_{local}(\omega) \mathbf{P}(\omega)
 \end{equation}
 
@@ -494,7 +494,7 @@ initiated 4000 streamlines from each seed voxel corresponding to a
 cortical or subcortical gray matter structure and tracked how many of
 these streamlines reached a target gray matter structure. The weighted
 connection between the two structures $c_{i,j}$, was defined as the
-number of streamlines initiated by voxels in region $\i$that
+number of streamlines initiated by voxels in region $i$that
 reach any voxel within region $j$, normalized by the sum of the source
 and target region volumes
 ($c_{i,j} = \frac{\textrm{streamlines}}{v_{i} + v_{j}}$). This
@@ -577,20 +577,20 @@ annealing \cite{Kirkpatrick1983}. The algorithm samples a set of
 parameters within a set of boundaries by generating an initial trial
 solution and choosing the next solution from the current point by a
 probability distribution with a scale depending on the current
-``temperature'' parameter. While the algorithm always accepts new trial
+"temperature" parameter. While the algorithm always accepts new trial
 points that map to cost-function values lower than the previous
 cost-function evaluations, it will also accept solutions that have
 cost-function evaluations greater than the previous one to move out of
 local minima. The acceptance probability function is
 $1/(1 + \frac{\mathrm{\Delta}}{e^{\max(T)}})$, where T is the current
-temperature and ∆ is the difference of the new minus old cost-function
+temperature and $\Delta$ is the difference of the new minus old cost-function
 evaluations. The initial parameter values and boundary constraints for
-each parameter are given in Supplementary Table 1. All simulated
+each parameter are given in Table \ref{tab:SGM_parameters}. All simulated
 annealing runs were allowed to iterate over the parameter space for a
 maximum of $N_{p} \times 3000$ iterations, where $N_{p}$ is the
 number of parameters in the model. As a comparison, we performed the
 same optimization procedure to a regionally non-varying Wilson-Cowan
-neural mass model \cite{wilson_mawilson_mathematical_1973,muldoon_stimulation-based_2016}.
+neural mass model \cite{wilson_mathematical_1973,muldoon_stimulation-based_2016}.
 
 \section{Results}
 \subsection{Graph Laplacian eigenmodes mediate a diversity of frequency
@@ -608,7 +608,7 @@ frequency. Small eigenvalues undergo a larger shift due to frequency,
 while the large ones stay more stable and tightly clustered around the
 nominal eigenvalue (i.e. at $\omega = 0$). Each eigenmode produces a
 frequency response based on its frequency-dependent eigenvalue
-(Figure \ref{fig:sgmodel}D, E}). Figure \ref{fig:sgmodel}D shows the transit in the
+(Figure \ref{fig:sgmodel}D, E). Figure \ref{fig:sgmodel}D shows the transit in the
 complex plane of a single eigenmode's frequency response, starting at
 low frequencies in the bottom right quadrant, and moving to the upper
 left quadrant at high frequencies. The magnitude, given by distance from
@@ -617,10 +617,17 @@ roughly corresponding to lower frequency alpha rhythm and another
 corresponding to higher frequency beta or gamma rhythms, respectively.
 In contrast, the lowest few eigenmodes start off far from the origin,
 indicative of a low-pass response. The magnitude of these complex-valued
-curves shown in figure 1E reinforces these impressions, with clear alpha
+curves shown in Figure \ref{fig:sgmodel}E reinforces these impressions, with clear alpha
 peak, as well as slower rhythms of the lowest eigenmodes. The spectral
 profile of the eigenmodes, especially the peak frequencies, are
 sensitive to the choice of model parameters as demonstrated below.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.81]{../figures/chapter5/fig2_conn_spectra.png}
+    \caption{Spectral graph model spectra for one subject. Top-Source localized MEG power spectrum for 68 parcellated brain regions. Estimated spectra for each brain region are shown in blue, and average spectrum across all regions is shown in black. The subsequent rows show each eigenmode's spectral magnitude response with model parameters optimized to match the MEG spectrum $(\tau_e = 0.0073, \tau_i = 0.0085, \tau_G = 0.0061, g_{ei} = 2.9469, g_{ii} = 4.4865, v = 18.3071, and \alpha = 0.4639)$. Left column shows each eigenmode's frequency responses, while the right column shows the same information as heatmaps. (a) Model using  subject's individual structural connectome. (b) Model using average template connectome obtained from 80 HCP subjects. (c) Model using uniform connectivity matrix of ones. (d) Model using randomized connectivity matrix with 75\% sparsity. (f) Model using randomized connectivity matrix with 95\% sparsity.}
+    \label{fig:conn_spectra}
+\end{figure}
 
 The spatial patterns of the first 5 eigenmodes of
 $\mathcal{L}(\omega)$, evaluated at the alpha peak of 10 Hz, are shown
@@ -633,3 +640,467 @@ connectome. However, these patterns are not exclusive and greatly depend
 on the frequency at which they are evaluated, as well as the model
 parameters. Higher eigenmodes are especially sensitive to axonal
 velocity and frequency (not shown here).
+
+Since the spectral graph model (SGM) relies on connectome topology, we
+demonstrate in Figure \ref{fig:conn_spectra} that different connectivity matrices
+produce different frequency responses: A) the individual's structural
+connectivity matrix, B) HCP average template connectivity matrix, C)
+uniform connectivity matrix of ones, D) a randomly generated matrix, E)
+and F) are randomly generated matrices with 75\% and 95\% sparsity
+respectively. For Figure \ref{fig:conn_spectra}A, optimized parameters for the individual
+subject's connectome were used. For Figures \ref{fig:conn_spectra}B-F, parameters optimized
+for the HCP template were used. We can observe the spectral profile of
+the eigenmodes, especially the peak frequencies, are sensitive to the
+choice of the connectome and the model parameters. All modeled power
+spectra show a broad alpha peak at around 10 Hz and a narrower beta peak
+at around 20 Hz. This is expected, since these general spectral
+properties are governed by the local linearized rate model. It is
+important to note that different eigenmodes accommodate a diversity of
+frequency responses; for instance, the lowest eigenmodes show a
+low-frequency response with no alpha peak whatsoever. In all cases the connectome modulates the spectral response in delta-theta range, leaving the higher gamma frequencies unchanged. Particularly, the low eigenmodes ($\mathbf{u}_1 \ldots \mathbf{u}_{20}$) appear to modulate the lower frequency range, up to beta, and may be considered responsible for the diversity of spectra observed in the model. In the frequency
+responses from biologically realistic individual and HCP template
+connectomes, there is a diversity of spectral responses amongst
+eigenmodes that is lacking in the response produced by the unrealistic
+uniform and randomized connectivity matrices. As we will see below, graph topology is
+critical to the power spectrum it induces, hence we explored whether and
+how sparsity of random graphs mediates spectral power (Figure \ref{fig:conn_spectra}D-F). At incrementally increasing sparsity levels, the diversity of
+spectral responses of different eigenmodes increases and approaches that
+of realistic connectomes. Therefore, graph eigenmodes induce unique and
+diverse frequency responses that depend on the topology of the graph.
+
+\subsection{Spectral distribution of MEG power depends on model parameters but not
+connectivity}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.85]{../figures/chapter5/fig3_spectra_fit.png}
+    \caption{Spectral graph model depicts MEG spectra. (a) The observed spectra and SGM's simulated spectra for four representative subjects. Red and cyan curves illustrate source localized empirical average spectra and region-wise spectra respectively. Black and blue curves illustrate simulated average spectra and region-wise spectra respectively. (b) Average observed spectrum across subjects is shown in red. Subsequently, we show average simulated spectra with optimized parameters for individual subject connectomes (black), HCP template connectome (purple), 80\% sparse distance connectome (blue), 80\% sparse random connectome (green). As a comparison, we also show simulated spectrum with a network neural mass model (pink) and average parameter values and individual connectome (green).}
+    \label{fig:spectra_fit}
+\end{figure}
+
+Network eigenmodes exhibit strong spatial patterning in their frequency
+responses, even with identical model parameters (Figure \ref{fig:spectra_fit}). We
+evaluated the model spectral response using the subject-specific
+$C^{ind}$ matrices of 4 representative subjects
+(Figure \ref{fig:spectra_fit}A). The model power spectra strikingly
+resemble empirical MEG spectra, displaying both the alpha and beta peaks
+on average, and similar regional variability as in real data.
+
+Regional averages of empirical and modeled power spectra of the entire
+group after full parameter optimization over individual subjects are
+shown in Figure \ref{fig:spectra_fit}B. The model closely replicates the observed
+power spectrum (red circles) equally well with both $C^{ind}$
+(black triangles) and $C^{HCP}$ (purple triangles). Thus, in
+most cases we can safely replace the subject-specific connectome with
+the template connectome. In contrast, when non-optimized average
+parameters were used (golden green triangles), it resulted in a worse
+fit, especially at high frequencies, suggesting that individualized
+parameter optimization is essential to produce realistic spectra. We
+also examined the model behavior for a random connectomes with 80\%
+sparsity (bright green triangles), or a distance-based connectome (blue
+triangles) was chosen with identical sparsity (80\%) to the actual
+connectome, and found that even with optimized parameters the average
+spectra could be accounted for by these connectomes.
+
+As another benchmark for comparison, a non-linear network neural mass model
+\cite{Wilson1972,muldoon_stimulation-based_2016} (add criticism paper) using our in-house MATLAB implementation, was generally able to produce characteristic alpha
+and beta frequency peaks, but this model does not resemble empirical
+wideband spectra. Note that no regionally-varying NMM parameters were
+used in order to achieve a proper comparison with our model, but both
+models were optimized with the same algorithm.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../figures/chapter5/fig4_violin.png}
+    \caption{Spectral graph model parameter optimization. (a) Distribution of optimized model parameter values across all 36 subjects for parameters $\{\tau_e, \tau_i, \tau_c, g_{ei}, g_{ii}, \alpha, v\}$ are shown in violin plots. (b) Performance of optimization algorithm. Spectral Pearson's correlation between simulated and MEG spectra at each iteration. Each curve shows the spectral correlation achieved by the model optimized for a single subject. (c) Distribution of spectral correlation between optimized model and observed spectra across subjects. Correlations with optimized parameters and 5 various connectomes are shown in the left-most columns. Correlations with average parameter values and the same connectomes are shown in the middle section. SGM model outperforms an optimized network NMM regardless of connectome type as denoted by asterisk $(p < 0.001)$.}
+    \label{fig:violin}
+\end{figure}
+
+Figure \ref{fig:violin}A shows violin plots of the optimized values,
+indicating that there is a large range of individually optimal model
+parameters across subjects. The time constants $\tau_{e}, \tau_{i}$
+showed tight clustering but the rest of the parameters showed high
+variability across subjects. The optimal parameters are in a
+biologically plausible range, similar to values reported in numerous
+neural mass models. The optimization algorithm aimed to maximize a cost
+function proportional to the posterior likelihood of the model, and was
+quantified by the Pearson's correlation between MEG and modeled spectra
+("Spectral correlation"). The convergence plots shown in
+Figure \ref{fig:violin}B, one curve for each subject, indicates substantial
+improvement in cost function from default choice as optimization
+proceeds. The distribution of optimized spectral correlations is shown
+in Figure \ref{fig:violin}C. Other model choices were evaluated for comparison: SGM
+on random connectomes with 80 and 95\% sparsity, with and without a
+distance effect described in Methods, and SGM applied with average
+optimal model parameters instead of individually optimized ones. In
+order to test for significance, Fisher's R to z transform was applied,
+followed by a paired t-test across all subjects between the optimal SGM
+and other models. The spectral fits for an SGM model with individual
+connectomes were significantly better than SGM models with average
+parameters, no matter what connectomes were chosen $(p<0.001)$.
+Interestingly, spectral fits for SGM model were comparable across all
+connectomes $(p >.05)$. Furthermore, spectral fits for the SGM
+model were significantly better than that for NMM models with optimized
+parameters and individual connectome $(p < 1e^{-20})$. Therefore, we
+conclude that with the graph spectral model, the overall regional
+spectra appear to be dependent on global model parameters rather than on
+the actual structural connectome.
+
+\subsection{Spectral graph model recapitulates the spatial distribution of
+MEG power}
+
+Next, we establish that the model is able to reproduce region-specific
+spectra, even though it uses identical local oscillations. We integrated
+the spectral area in the range 8-12 Hz for alpha and 13-25 Hz for beta,
+of each brain region separately. We define "\emph{spatial
+correlation}" (as compared to spectral correlation above) as Pearson's
+R between the \emph{regional distribution} of empirical MEG and
+model-predicted power within a given frequency band.
+
+\subsubsection{Small number of eigenmodes capture spatial distributions of
+alpha and beta band activity}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../figures/chapter5/fig5_alpha.png}
+    \caption{Alpha power spatial distribution depicted by specific spectral graph model eigenmodes. (a,b) The spatially distributed patterns of alpha band power for two representative subjects are displayed in brain surface renderings. For each three brain panels shown, the medial surface rendering is shown on the left column while the lateral surface is rendered on the right, the left hemisphere is shown on top and the right hemisphere is shown in the bottom row. Left column: The observed MEG alpha band spatial distribution showing higher power in posterior regions of the brain. Middle column: Spatial distribution of the best matching eigenmode from the SGM. Right column: Spatial distribution of the best cumulative combination of eigenmodes from the SGM. (c) Alpha band spatial correlation for all subjects from SGM simulations with increasing number of cumulative eigenmodes. Individual subject alpha band spatial correlations are shown in cyan $(n=36)$. Panels A and B correspond to the subjects indicated by red and blue curves respectively. Black curve is the average performance across all subjects.}
+    \label{fig:alpha}
+\end{figure}
+
+We noticed during our experimentation that only a few eigenmodes appear
+to contribute substantially to observed MEG alpha and beta patterns.
+Hence we hypothesized that spatial correlations could be improved by
+selecting a small subset of eigenmodes. Therefore, we developed a
+sorting strategy whereby we first rank the eigenmodes in descending
+order of spatial correlation for a given subject and given frequency
+band. Then we perform summation over only these eigenmodes according to
+Eq \ref{eq:sgm}, each time incrementally adding a new eigenmode to the sum. The
+spatial correlation of these "sorted-summed" eigenmodes against
+empirical alpha power are plotted in Figure \ref{fig:alpha}C as a function of
+increasing number of eigenmodes; one curve for each subject. The thick
+black curve represents the average over all subjects. The spatial
+correlation initially increases as we add more well-fitting eigenmodes,
+but peaks around, and begins declining thereafter. Addition of the
+remaining eigenmodes only serves to reduce the spatial correlation. This
+behavior is observed in almost all subjects we studied.
+
+Examples of predicted alpha patterns: Figure \ref{fig:alpha} shows brain
+surface renderings of the spatially distributed patterns of alpha band
+power for two representative subjects. Regions are color coded as a
+heatmap of regional power scaled by mean power over all regions. The
+observed MEG spatial distribution pattern of alpha band shows higher
+power in posterior regions of the brain, as expected, with strong effect
+size in temporal, occipital and medial posterior areas. This pattern is
+matched by one of the eigenmodes (\#10, shown in middle panel, giving
+$R=0.65$), and slightly better by a weighted combination of 2 eigenmodes
+($R=0.69$). However, the model did not reproduce parietal and
+parieto-occipital components seen in real data. The other subject
+produced similar results, but with 6 eigenmodes. In this instance, the
+parietal component seen in real data were reasonably reproduced by the
+model.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../figures/chapter5/fig6_beta.png}
+    \caption{Beta power spatial distribution depicted by specific spectral graph model eigenmodes. Legends and layout is identical to Figure \ref{fig:alpha} but shown for beta band spatial distributions.}
+    \label{fig:beta}
+\end{figure}
+
+Examples of predicted beta patterns. Empirical beta power
+(Figure \ref{fig:beta}, left) is spread throughout the cortex, especially
+frontal and sensorimotor cortex. A combination of 4 and 6 best matching
+eigenmodes produced the best model match to the source localized pattern
+of two representative subjects, respectively, with $R = 0.55$ and $R=0.48$.
+Figure \ref{fig:beta}C shows how the spatial correlation changes as more
+eigenmodes are used in the "sorted summed" computations, analogous to
+that of alpha pattern. Here too a peak is achieved for a small number of
+eigenmodes, typically under 10.
+
+\subsubsection{Spatial correlation achieved by the spectral graph model is
+significantly higher than alternative models}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{../figures/chapter5/fig7_spatial.png}
+    \caption{Spatial correlation performance of the SGM. Distribution of the SGM for all subjects with the best performing eigenmode. (a) Alpha band spatial correlations. (b) Beta band spatial correlations. For both panels, spatial correlations are shown for SGM with subject individual connectomes ($C^{ind}$, black), random connectomes with 80\% and 95\% sparsity (green), geodesic distance based connectome ($C^{dist}$, blue), and finally for a NMM with specific individual connectome (pink). For each scenario, a selection of the best eigenmodes were obtained for spatial correlation calculations separately. Paired t-tests between SGM($C^{ind}$) and all other model simulations show that the SGM with individual connectomes significantly outperform all other models; $p < 0.001$ for all alpha spatial correlations and $p < 0.012$ for all beta spatial correlations.}
+    \label{fig:spatial}
+\end{figure}
+
+The distribution of peak spatial correlations in the alpha band, using
+optimized parameters and individual connectomes of all subjects, is
+plotted in Figure \ref{fig:spatial}A. For comparison we show results for four
+model types: a) SGM on subject specific individual
+connectomes ($C^{Ind}$, black); b) SGM with the HCP
+template connectome ($C^{HCP}$ , purple); c) SGM on random
+connectomes with 80\% sparsity comparable to individual connectomes or
+with 95\% sparsity where the model shows spectral diversity
+($C^{Rdm}$ , green); d) SGM on geodesic distance based
+connectomes ($C^{Dist}$ , blue); and e) a Wilson-Cowan
+NMM with subject specific individual connectome
+($C^{Ind}$ , pink). Analogous results for beta band spatial
+correlations are contained in Figure \ref{fig:spatial}B. For each connectome
+model, a selection of the cumulative best set of eigenvectors were
+separately obtained for spatial correlation calculations. Across all
+subjects the proposed model, SGM on $C^{Ind}$ , gives
+excellent spatial correlations in alpha band (R distribution centered at
+0.6) as well as in the beta band ($R$ distribution centered at 0.5).
+
+\subsubsection{Alternate non-linear model}
+The Wilson-Cowan neural mass model also did not succeed in predicting the spatial patterns of alpha or beta power, with poor correlations (r centered at 0). This could be because
+in our implementation we enforced uniform local parameters with no
+regional variability. However, this is the appropriate comparison, since
+our proposed model also does not require regionally-varying parameters.
+Interestingly, the random connectomes and geodesic distance based
+connectome also appear to have some ability to capture these spatial
+patterns ($R$ centered at 0.4 and 0.2 respectively), perhaps due to the
+implicit search for best performing eigenmodes, which on average will
+give at least a few eigenmodes that look like MEG power purely by
+chance.
+
+Collectively, we conclude that the graph model is able to fit both the
+spectral and spatial features of empirical source localized MEG data,
+and that the optimal fits performed on individual subjects occurs at
+widely varying subject-specific parameter choices.
+
+\section{Discussion}
+
+The proposed hierarchical graph spectral model of neural oscillatory
+activity is a step towards understanding the fundamental relationship
+between network topology and the macroscopic whole-brain dynamics. The
+objective is not just to model brain activity phenomenologically, but to
+analytically derive the mesoscopic laws that drive macroscopic dynamics.
+This model of the structure-function relationship has the following key
+distinguishing features: \emph{(a) Hierarchical}: the model's
+complexity depends on the level of hierarchy being modeled: complex,
+non-linear and chaotic dynamics can be accommodated at the local level,
+but linear graph model is sufficient at the macro-scale. \emph{(b)
+Graph-based}: Macroscopic dynamics is mainly governed by the
+connectome, hence linear approximations allow the steady-state frequency
+response to be specified by the graph Laplacian eigen-decomposition,
+borrowing heavily from \textbf{spectral graph theory}
+\cite{auffarth_spectral_2007,Kondor02diffusionkernels,larsen_medical_2006,Ng01onspectral}. \emph{(c) Analytic}: The model is
+available in closed form, without the need for numerical simulations.
+\emph{(d) Low-dimensional and parsimonious}: Simple, global and
+universal rules specified with a few parameters, all global and apply at
+every node, are able to achieve sufficiently complex dynamics. The model
+is incredibly easy to evaluate, taking no more than a few seconds per
+brain and to infer model parameters directly from a subject's MEG data.
+The optimized model matches observed spectral and spatial patterns in
+MEG data quite well. No time-consuming simulations of coupled neural
+masses or chaotic oscillators were needed; indeed, the latter greatly
+underperformed our model. We report several novel findings with
+potentially important implications, discussed below.
+
+\subsection{Recapitulating regional power spectra at all frequencies}
+
+Our main result is the robust demonstration of the model on 36 subjects'
+MEG data. The representative examples shown in Figures \ref{fig:spectra_fit}-\ref{fig:beta} indicate that the graph model recapitulates the observed source localized MEG power
+spectra for the 68 parcellated brain regions, reproducing the prominent
+alpha and beta peaks. For each region, the model is also able to predict
+some characteristics of the full bandwidth power spectra, including what
+appears to be an inverse power law fall-off over the entire frequency
+range of interest. However, this aspect will be quantitatively
+characterized in future work.
+
+We designed a comprehensive parameter optimization algorithm on
+individual subjects' MEG data of a suitably defined cost function based
+on Pearson R statistic as a way to capture all relevant spectral
+features. Using this fitting procedure, we were able to obtain the range
+of optimally-fitted parameters across the entire study cohort. As shown
+in Figure \ref{fig:violin}A, the range is broad in most cases, implying that there is
+significant inter-subject variability of model parameters, even if a
+template connectome is used for all. We tested the possibility that a
+group-averaged parameter set might also succeed in matching real
+spectral data on individuals. But as shown in Figures \ref{fig:spectra_fit}B and \ref{fig:violin}C, this
+was found to be a poor choice, supporting the key role of individual
+variability of model parameters (but not variability in the connectome).
+However, no model is capable of reproducing higher frequencies in the
+higher beta and gamma range seen in MEG, since by design and by
+biophysical intuition these frequencies arise from local neural
+assemblies rather than from modulation by macroscopic networks.
+
+\subsection{Revealing sources of heterogeneity in spatial patterns of brain
+activity}
+
+The spatial match between model and data is strongest when the model
+uses empirical macroscopic connectomes obtained from healthy subjects'
+diffusion weighted MRI scans, followed by tractography. The use of
+"null" connectomes - randomized connectivity matrices of varying
+levels of sparsity and distance-based connectivity matrices,
+respectively, did far worse than actual human connectomes (Figure \ref{fig:spatial}),
+supporting the fact that the latter is the key mediator of spatial
+patterns of real brain activity. The match was also significantly
+different when using a template HCP connectome versus the individual
+subject's own connectomes, and when compared to spatial
+patterns predicted by an NMM. In conclusion, for the purpose of
+predicting the spatial topography of brain activity, it is important to
+use individual connectomes and optimized model parameters.
+
+\subsection{Macroscopic brain rhythms are governed by the connectome}
+
+A predominant view assumes that different brain rhythms are produced by
+groups of neurons with similar characteristic frequencies, which might
+synchronize and act as "pacemakers". How could this view explain why
+alpha and beta power are spatially stereotyped across subjects, and why
+the alpha signal is especially prominent in posterior areas? Although
+practically any computer model of cortical activity can be tuned, with
+suitable parameter choice, to oscillate at alpha frequency, e.g.
+\cite{liley_alpha_1999,robinson_multiscale_2005,Nakagawa2014,
+Deco2012,david_neural_2003,nunez_theoretical_2006,vijayan_thalamocortical_2013}, none of them are able to parsimoniously recapitulate the posterior origin of alpha. Thus the
+prominence of posterior alpha might be explained by the hypothesized
+existence of alpha generators in posterior areas. Indeed, most
+oscillator models of local dynamics are capable of producing these
+rhythms at any desired frequency \cite{liley_alpha_1999,david_neural_2003,van_rotterdam_model_1982,liley_spatially_2002,Spiegler2013}, and therefore it is common to tweak their parameters to reproduce alpha
+rhythm. Local networks of simulated multicompartmental neurons can
+produce oscillations in the range 8--20 Hz \cite{liley_alpha_1999}, and, in
+a non-linear continuum theory, peaks at various frequencies in the range
+2--16Hz were obtained depending on the parameters \cite{liley_spatially_2002}.
+Specifically, the role of thalamus as pacemaker has motivated
+thalamocortical models \cite{izhikevich_large-scale_2008,robinson_multiscale_2005} that are capable of resonances in various ranges. Neural field models of the thalamocortical
+loop \cite{robinson_multiscale_2005} can also predict slow-wave and spindle
+oscillations in sleep, and alpha, beta, and higher-frequency
+oscillations in the waking state. In these thalamocortical models, the
+posterior alpha can arise by postulating a differential effect in
+weights of the posterior versus anterior thalamic projections, e.g.
+\cite{vijayan_thalamocortical_2013}. Ultimately, hypotheses requiring local rhythm
+generators suffer from lack of parsimony and specificity: a separate
+pacemaker must be postulated for each spectral peak at just the right
+location \cite{nunez_study_1981}.
+
+An alternative view emerges from our results that macroscopic brain
+rhythms are governed by the structural connectome. Even with global
+model parameters, using the exact same local cortical dynamics captured
+by the local transfer function $H_{local}(\omega)$, driven by
+identically distributed random noise $\mathbf{P}(\omega)$, our model
+is capable of predicting prominent spectral (Figures \ref{fig:conn_spectra}, \ref{fig:spectra_fit}) and spatial
+(Figures \ref{fig:alpha},\ref{fig:beta}) patterning that is quite realistic. This is especially
+true in the lower frequency range: indeed, the model is able to predict
+not just the frequency spectra in alpha and beta ranges, but also their
+spatial patterns -- i.e. posterior alpha and distributed but roughly
+frontal beta. Although this is not definitive proof, it raises the
+intriguing possibility that the macroscopic spatial distribution of the
+spectra of brain signals \emph{does not require spatial
+heterogeneity of local signal sources, nor regionally variable
+parameters}. Rather, it implies that the most prominent
+\emph{patterning of brain activity (especially alpha) may be
+governed by the topology of the macroscopic network} rather than by
+local, regionally-varying drivers. Nevertheless, a deeper exploration is
+required of the topography of the dominant eigenmodes of our linear
+model, in order to understand the spatial gradients postulated
+previously \cite{robinson_multiscale_2005,vijayan_thalamocortical_2013}.
+
+\subsection{Emergence of linearity from chaotic brain dynamics}
+
+The non-linear and chaotic dynamics of brain signals may at first appear
+to preclude deterministic or analytic modeling of any kind. Yet, vast
+swathes of neuroscientific terrain are surprisingly deterministic,
+reproducible and conserved across individuals and even species. Brain
+rhythms generally fall within identical frequency bands and spatial maps
+\cite{freeman_simulated_2009,robinson_multiscale_2005,he_temporal_2010}. Based on the hypothesis that the emergent
+behavior of long-range interactions can be independent of detailed local
+dynamics of individual neurons \cite{shimizu_co-operative_1983,misic_communication_2014,misic_cooperative_2015,destexhe_wilson-cowan_2009,abdelnour_network_2014}, and may be
+largely governed by long-range connectivity \cite{abdelnour_estimating_2015,Nakagawa2014,jirsa_spatiotemporal_2002,Deco2012}, we
+have reported here a minimal linear model of how the brain connectome
+serves as a spatial-spectral filter that modulates the underlying
+non-linear signals emanating from local circuits. Nevertheless, we
+recognize the limitations of a linear model and its inability to capture
+inherent non-linearities across all levels in the system.
+
+\subsection{Relationship to other work}
+
+One can view the proposed generative model as a biophysical realization
+of a dynamic causal model (DCM) \cite{daunizeau_dynamic_2011,friston_dynamic_2017,pinotsis_anatomical_2013,razi_construct_2015,pinotsis_linking_2017} for whole brain electrophysiological activity but with very different goals, model
+dimensionality and inference procedures.
+
+First, the goal of many prior efforts using DCMs is to examine effective
+connectivity in EEG, LFP and fMRI functional connectivity data,
+typically for smaller networks\cite{pinotsis_linking_2017,daunizeau_dynamic_2009}, or dynamic
+effective connectivity\cite{park_dynamic_2018,van_de_steen_dynamic_2019,preti_dynamic_2017}. Hence, they address the second order covariance structures of brain activity. In particular,
+recent spectral DCM and regression DCM models \cite{razi_large-scale_2017,frassle_regression_2017,frassle_generative_2018}
+with local neural masses are formulated in the steady-state
+frequency-domain, and the resulting whole-brain cross-spectra are
+evaluated. The goals of these models are to derive model cross-spectra
+that define the effective connectivity in the frequency domain and are
+compared with empirical cross-spectra. Based on second-order sufficient
+statistics, these models attempt to derive effective connectivity from
+functional connectivity data. These DCMs have so far only been applied
+to small networks or to BOLD fMRI regime. In contrast, our goal is to
+examine the role of the eigenmodes of the structural connectome and
+their influence on power spectral distributions in the full MEG
+frequency range, and over the entire whole brain. In subsequent work, we
+intend to extend our efforts to examining effective connectivity but
+such an effort currently remains outside the scope of the work in this
+paper. Here, we focus on models that directly estimate the first order
+effects of observed power spectra and its spatial distributions and
+compare them with empirical MEG source reconstructions. Our primary
+motivation is to examine whether spatial distribution of observed power
+spectra can arise from graph structure of the connectome, hence our
+focus on the effects of model behavior as a function of the underlying
+structural connectome -- whether it is individualized, template-based,
+uniform, random or distance based. DCM methods have not reported first
+order regional power spectra as we do here, nor have they explored how
+the structural connectome influences model spectral distributions.
+
+Second, our model is more parsimonious compared to most of these
+above-mentioned models which have many more degrees of freedom because
+they often allow for regions and their interactions to have different
+parameters. Our model parameterization, with only a few global
+parameters, lends itself to efficient computations over fine-scale
+whole-brain parcellations, whereas most DCMs (with the exception of
+recent spectral and regression DCMS\cite{razi_large-scale_2017,frassle_regression_2017,frassle_generative_2018}) are suited
+for examining smaller networks but involve large effective connectivity
+matrices and region-specific parameters. Furthermore, parameters of our
+model remain grounded and interpretable in terms of the underlying
+biophysics, i.e. time constants and conductivities. In contrast,
+spectral and regression DCM models of cross-spectra have parameters that
+are abstract and do not have immediate biophysical interpretation.
+
+The third major difference is in the emphasis placed on Variational
+Bayesian inference in DCM. Since our focus was on exploring model
+behavior over a small number of global parameters and a set of
+structural connectomes (whether anatomic or random) of identical
+sparsity and complexity, it was sufficient to use a \emph{maximum a
+posteriori} (MAP) estimation procedure for Bayesian inference of our
+global model parameters with flat non-informative priors with
+pre-determined ranges based on biophysics. Like most DCM efforts our
+model can be easily be extended to Variational Empirical Bayesian
+inference for parameter estimation, for instance to compute a full
+posterior of the structural connectivity matrix. In such a formulation,
+we can assume that the observed structural connectome will serve as the
+prior mean of the connectivity matrix. We reserve such extensions to our
+future work with this spectral graph model.
+
+\subsection{Other limitations and extensions}
+
+The model currently examines resting-state activity, but future
+extensions will include prediction of functional connectivity,
+task-induced modulations of neural oscillations and causal modeling of
+external stimuli, e.g. transcranial magnetic and direct current
+stimulation. The current implementation does not incorporate complex
+local dynamics, but future work will explore using non-white internal
+noise and chaotic dynamics for local assemblies. This may allow us to
+examine higher gamma frequencies. Although our model incorporates
+latency information derived from path distances, we plan to explore
+path-specific propagation velocities derived from white matter
+microstructural metrics such as axon diameter distributions and myelin
+thickness. Future work will also examine the specific topographic
+features of the structural connectome that may best describe canonical
+neural activity spectra. Finally, we plan to examine the ability of the
+model to predict time-varying structure-function relationships.
+
+\subsection{Potential applications}
+
+Mathematical encapsulation of the structure-function relationship can
+potentiate novel approaches for mapping and monitoring brain diseases
+such as autism, schizophrenia, epilepsy and dementia, since early
+functional changes are more readily and sensitively measured using fMRI
+and MEG, compared to structural changes. Because of the complementary
+sensitivity, temporal and spatial resolutions of diffusion MRI, MEG, EEG
+and fMRI, combining these modalities may be able to reveal fine
+spatiotemporal structures of neuronal activity that would otherwise
+remain undetected if using only one modality. Current efforts at fusing
+multimodalities are interpretive, phenomenological or statistical, with
+limited cognizance of underlying neuronal processes. Thus, the ability
+of the presented model to quantitatively and parsimoniously capture the
+structure-function relationship may be key to achieving true
+multi-modality integration.
