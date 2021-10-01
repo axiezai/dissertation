@@ -1,0 +1,38 @@
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth]{../figures/supplements/params_bestr.pdf}
+\caption{Parameter dependency of structural complex Laplace eigenmodes.}
+\caption*{Heat-maps displaying best achievable spatial correlation values (Spearman's) by a single eigenmode across all parameter values for each canonical functional network. Shifts in coupling strength (top) does not cause a change in peak spatial correlation. The bottom row shows the transmission speed and oscillating frequency of signals in the network dictates the cortical activation patterns in the brain, shifts in wave number parameters while holding global coupling constant changes the best achievable spatial similarity to each canonical network.}
+\label{fig:S1}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\includegraphics[width=0.85\linewidth]{../figures/supplements/pvals.png}
+\caption{Statistical comparison between HCP connectome and random connectome with Pearson's correlation.}
+\caption*{$P$-values table from random connectome comparisons of leading eigenmodes. Z-score distributions of spatial correlation (Pearson's) were created from 1000 sets of complex Laplace eigenmodes of  $C_{random}^{*}(D_{random})$ and $C_{HCP}^{*}(D_{random})$ random connectomes. For all canonical networks' similarity comparisons, a 95\% confidence interval of the Z-scores distributions were obtained and used to compute the $P$-values shown in the tables.}
+\label{tab:S1}
+\end{table}
+
+\begin{figure}[htbp]
+\includegraphics[width=\textwidth]{../figures/supplements/spearman_residual.png}
+\caption{Spatial similarity quantified by Spearman's correlation}
+\caption*{Spatial pattern similarity of HCP template connnectome complex Laplacian structural eigenmodes to canonical functional networks quantified with Spearman's correlation. The same analysis performed in Figure 2 but Pearson's correlation was replaced with Spearman's correlation for discrete samples for the bottom row, and the top row shows linear least square residuals. Despite the more inconsistent increasing trend in spatial pattern similarity due to ranking of discrete samples, the complex Laplacian eigenmodes are able to outperform the real-valued Laplacian eigenmodes (blue), complex eigenmodes from random structural connectome with random distance matrix (green), as well as complex eigenmodes from HCP template connectome with random distance matrix.}
+\label{fig:S2}
+\end{figure}
+
+\begin{table}[ht!]
+\centering
+\includegraphics[width=0.85\linewidth]{../figures/supplements/spearman_pvals.png}
+\caption{Statistical comparison between HCP connectome and random connectome with Spearman's correlation.}
+\caption*{$P$-values table from random connectome comparisons of leading eigenmodes. This table is produced the same way as Table S1, but the Z-score distributions were computed from Spearman's correlation}
+\label{tab:S2}
+\end{table}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\textwidth]{../figures/supplements/scatter_plot_dice.png}
+\caption{Dice coefficient optimized spatial correlation.}
+\caption*{Dice coefficient optimized model parameters display similar spatial matching as spatial correlation optimized model parameters. Both the canonical functional networks and complex Laplacian eigenmodes were binarized with a threshold value that resulted in the closest number of non-zero elements in both spatial maps, then the optimized model parameters were found by minimizing the dice coefficient between binarized versions of the canonical functional networks and the complex Laplacian eigenmodes. Scatter plots shows the linear combination of the top 10 matching eigenmodes for each canonical functional network and their linear regression fitted line with 95\% confidence intervals.}
+\label{fig:S3}
+\end{figure}
