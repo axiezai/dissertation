@@ -1,3 +1,6 @@
+## Repo specific stuff:
+figures
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
