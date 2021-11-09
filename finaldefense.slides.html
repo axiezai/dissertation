@@ -13210,7 +13210,9 @@ a.anchor-link {
 </center><p style = "text-align:center; font-size:70%;">Xi He Xie</p>
 <p style = "text-align:center; font-size:70%;">Department of Neuroscience, Weill Cornell Medicine</p>
 <p style = "text-align:center; font-size:70%;">Visiting Graduate, University of California San Francisco</p>
-<p style = "text-align:center; font-size:70%;">Nov 8th, 2021</p>
+<p style = "text-align:center; font-size:70%;">Nov 8th, 2021</p><aside class="notes">
+Welcome everyone to my thesis defense on model based analysis of multimodal neuroimaging, where I hope to tell you a story from existing efforts to solve the brain's structure-function problem with neural masses to the advancements we've made in a more friendlier context: spectral graph theory.
+</aside>
 </div>
 </div>
 </div></section><section>
@@ -13317,7 +13319,7 @@ So this is from xkcd, and it's true there's an xkcd comic for everything. The br
 <li>What are some non-invasive methods of recording data from a living human brain?</li>
 </ul>
 <aside class="notes">
-Now we have our first obvious obscacle, it's already difficult to introspectively examine our own tendencies and flaws, but now we want tell a story about the brain's structure and function relationship in general. Good thing we have technologies to help us look at the brain
+Now we have our first obvious obscacle, it's already difficult to introspectively examine our own tendencies and flaws, but now we want tell a story about the brain's functional relationship to its structure... NONINVASIVELY.
 </aside>
 </div>
 </div>
@@ -13406,7 +13408,9 @@ Now we align both the white matter fibers and our anatomical MRI scans, from eac
 <p>Network neuroscience described in 3 dimensions by Bassett, Zurn &amp; Gold's review in 2018:</p>
 <center>
 <img src = "figures/presentation/dani_dimensions.png" alt = "dims" style = "align:center;width:800px;height:650px"/>
-</center>
+</center><aside class="notes">
+On the other hand with functional connectivity, things get a little trickier. With anatomical connectivity, we are estimating direct correlates of white-matter anatomy. However, functional networks are not as simple as direct correlates, they are usually second order statistics and there are a lot of decisions to be made about how we are estimating FC. For example: this figure
+</aside>
 </div>
 </div>
 </div></div></section><section>
@@ -13459,7 +13463,7 @@ We can use a very simple example to highlight the threat of confounding, a scena
 </li>
 <li><p>Yet the lots of prominent publications are claiming changes in FC or model parameters are revealing mechanistic links ("connectivity") between neuron populations.</p>
 </li>
-<li><p>The best we can say is the joint statistical distributions show potential biomarkers that helps classify certain groups of people at a particular epoch of time. (But even then...)</p>
+<li><p>The best we can say is the joint statistical distributions show potential biomarkers that helps classify certain groups of people at a particular epoch of time.</p>
 </li>
 </ul>
 
@@ -13477,7 +13481,7 @@ We can use a very simple example to highlight the threat of confounding, a scena
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Mean field theory originates from studies of magnetism and fluid dynamics, where scholars needed a few macroscopic variables to describe the collective behavior of individual units.</p>
-<p>The framework for application of mean field theory is dynamical systems, an example is Einstein's famous law of motion:</p>
+<p>The framework for application of mean field theory is dynamical systems, an example is Newton's famous law of motion:</p>
 $$ \frac{dV}{dt} = \frac{F}{m} $$<aside class="notes">
 While it is difficult to account for various accelerations of all particles in a system, we can use state variables to summarize the system's motion: F and M. Similarly in neuroscience, instead of accounting for every neuron's ion channel properties, current polarization state, or its connections, we summarize them into state variables that describe the mean firing rate over the population.
 </aside>
@@ -13510,7 +13514,7 @@ Mean field models extention to whole brain network models...
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">interactive</span><span class="p">(</span>
@@ -13539,13 +13543,13 @@ Mean field models extention to whole brain network models...
 
  
  
-<div id="1c5ffbd7-6581-48e8-bcec-d1dc550e0ac6"></div>
+<div id="60f6843e-7475-436d-9db8-53a3f1a11963"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#1c5ffbd7-6581-48e8-bcec-d1dc550e0ac6');
+var element = $('#60f6843e-7475-436d-9db8-53a3f1a11963');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "0ed32daa8d504ee5b2d99cad49f78eaf", "version_major": 2, "version_minor": 0}
+{"model_id": "d5e407a5c45c496fbefdf5cb8a46bcbe", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -13742,7 +13746,7 @@ $$ \frac{dE}{dt} = -D(E) + \Psi (E) + \mathbf{A}E(t-\tau_d) + \epsilon (t)$$<asi
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">interactive</span><span class="p">(</span>
@@ -13773,13 +13777,13 @@ $$ \frac{dE}{dt} = -D(E) + \Psi (E) + \mathbf{A}E(t-\tau_d) + \epsilon (t)$$<asi
 
  
  
-<div id="88e19079-0a96-4119-8094-8bb7d7219325"></div>
+<div id="bda1cd39-b81a-44a5-8a71-d62297a16de2"></div>
 <div class="output_subarea output_widget_view ">
 <script type="text/javascript">
-var element = $('#88e19079-0a96-4119-8094-8bb7d7219325');
+var element = $('#bda1cd39-b81a-44a5-8a71-d62297a16de2');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "4b9a07e6afa34911a017c3d15556a77e", "version_major": 2, "version_minor": 0}
+{"model_id": "c3ed62e11fb24e239916887213929086", "version_major": 2, "version_minor": 0}
 </script>
 </div>
 
@@ -14139,7 +14143,7 @@ $$ X(\omega) = \sum_{i} \frac{u_i(\omega) u_i^H (\omega)}{j\omega + \frac{1}{\ta
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <center>
-    <img src = "figures/presentation/parents.png" alt = "parents" style = "align:center;width:950px;height:560px"/>|
+    <img src = "figures/presentation/parents.png" alt = "parents" style = "align:center;width:950px;height:560px"/>
 </center>
 </div>
 </div>
