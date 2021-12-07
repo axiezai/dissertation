@@ -36,3 +36,27 @@
 \caption*{Dice coefficient optimized model parameters display similar spatial matching as spatial correlation optimized model parameters. Both the canonical functional networks and complex Laplacian eigenmodes were binarized with a threshold value that resulted in the closest number of non-zero elements in both spatial maps, then the optimized model parameters were found by minimizing the dice coefficient between binarized versions of the canonical functional networks and the complex Laplacian eigenmodes. Scatter plots shows the linear combination of the top 10 matching eigenmodes for each canonical functional network and their linear regression fitted line with 95\% confidence intervals.}
 \label{fig:S3}
 \end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.6]{../figures/chapter3/c5_behavior.png}
+    \caption{Network model behavior in response to global coupling.}
+    \caption*{Panels showing network model's time course, frequency spectrum, and coherence functional connectivity from top to bottom with increasing global coupling parameter $c_5$. Simulations are performed with default parameter values and external driving force right at the Hopf bifurcation point so that oscillatory activity is mainly driven by $c_5$ ($P ~= 1.1$). The model's time course and frequency spectrum has the same dominant frequency and does not shift as $c_5$ is increased. However, the coherence FC matrices starts as saturated but changes to more a more sparse matrix as $c_5$ is increased. The example time course is shown for one brain region only, whereas the frequency spectrum is shown for all brain regions.}
+    \label{fig:c5_behavior}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{../figures/chapter3/coh_results.png}
+    \caption{Global Parameters Sampling for maximizing likelihood to $\alpha$ band coherence.}
+    \caption*{Corner plot constructed after MCMC sampling for 50000 steps, showing posterior means and 95\% confidence intervals for all parameters. The first 5000 steps were discarded as burn-in steps. Neither $\tau_e$ or $\tau_i$ deviated far from the initial positions, and there is high uncertainty around $c_5$ and $P$. Bottom row shows the model simulated coherence with resulting posterior means and the scatter plot against MEG coherence with linear fit for the coherence matrix entries showing no correlation at all.}
+    \label{fig:coh_hopf}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{../figures/chapter3/aec_results.png}
+    \caption{Global Parameters Sampling for maximizing likelihood to amplitude envelope correlation.}
+    \caption*{Corner plot constructed after MCMC sampling for 25000 steps, showing posterior means and 95\% confidence intervals for all parameters. The first 5000 steps were discarded as burn-in steps. Neither $\tau_e$ or $\tau_i$ deviated far from the initial positions, but the posterior distributions have narrower confidence intervals as compared to coherence sampling in Figure \ref{fig:coh_hopf}. Bottom row shows the model simulated AEC with resulting posterior means and the scatter plot against MEG AEC with linear fit showing a slight correspondence, but different scales.}
+    \label{fig:aec_hopf}
+\end{figure}
