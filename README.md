@@ -1,6 +1,8 @@
 # My PhD Dissertation
 Model based analysis of multimodal neuroimaging: from neural masses to spectral graph theory.
 
+The PDF file viewable at `main/dissertation.pdf`.
+
 ### How to compile:
 I recommend downloading TexMaker or installing LaTeX workshop extension with VSCode, then compiling the `dissertation.tex` file. 
 
