@@ -18,12 +18,13 @@ Despite the prolific use of NMMs for whole brain model-based analysis and the pr
 The essential factor underlying the challenge of inference is the nonlinear nature of NMMs, whose coupling via the connectome leads to well characterized chaotic behavior. This then leads to difficulties in parameter inference and generalizable decoding of neural mechanisms. The saddle point and Hopf bifurcation behavior of the Wilson-Cowan model were described by the original work of Wilson \& Cowan \cite{Wilson1972}, the Virtual Brain \cite{sanz-leon_mathematical_2015} and in reviews \cite{breakspear_dynamic_2017}. A common observation in such nonlinear systems is that large parameter regimes give uninteresting steady-state behavior, but exhibit discontinuous and abrupt shits to interesting oscillating, unstable or chaotic behavior when network coupling or external driving force parameters push the system over the Hopf bifurcation. During parameter inference, discontinuous switching between regimes and model behavior leads to a non-convex cost function with many local minima. One way to avoid these issues is to set all biophysiological parameters for local populations in a NMM to be near an appropriate Hopf bifurcation point that gives the correct frequency (e.g. alpha band). This is then followed by optimization of the remaining few (global) parameters to fit the second order functional connectivity (FC) metrics such as pairwise correlation or synchrony \cite{Zimmermann2018, Deco2009, abeysuriya_biophysical_2018, wang_inversion_2019, demirtas_hierarchical_2019, honey_predicting_2009}. Frequently the last piece is achieved via manual grid search. Table \ref{tab:nmm_pubs} summarizes relevant recent studies that follow this approach.
 
 \begin{table}
- \caption{Whole Brain Neural Mass Model Parameter Inference Publications and their performance. This table does not include publications with whole brain mean field models or mechanistic models of neural activity. }
+ \caption{Whole Brain Neural Mass Model Parameter Inference Publications and their performance.}
+ \caption*{This table does not include publications with whole brain mean field models or mechanistic models of neural activity.}
   \centering
-  \begin{tabular}{llll}
+  \begin{tabular*}{\textwidth}{llll}
     \toprule
     \cmidrule(r){1-2}
-    Name & Modality  & Target  & Highest Accuracy \\
+    Name & Modality  & Target  & Accuracy \\
     \midrule
     Zimmerman et al. \cite{Zimmermann2018} & fMRI & Correlation FC & $r=0.57$  \\
     Honey et al. \cite{honey_predicting_2009} & fMRI & Correlation FC & $ r=0.48$ \\
@@ -36,7 +37,7 @@ The essential factor underlying the challenge of inference is the nonlinear natu
     Deco et al. (2009) \cite{Deco2009} & fMRI & Kuramoto order parameter & Not reported \\
     Hadida et al. \cite{hadida_bayesian_2018} & MEG & Envelope FC & $r=0.42$ \\
     \bottomrule
-  \end{tabular}
+  \end{tabular*}
   \label{tab:nmm_pubs}
 \end{table}
 
@@ -94,7 +95,8 @@ For all model parameters $\theta$, we will use uniform ("uninformative") distrib
 
 \begin{table}[]
     \centering
-    \caption{Default parameters for the Wilson-Cowan oscillator model. The excitatory driving force $P$ and time constants $\tau_e$ and $\tau_i$ are inferred during our experimentation, and their initial values are shown here. All default values are set such that small inputs would cause the system to oscillate (near the Hopf bifurcation point).}
+    \caption{Default parameters for the Wilson-Cowan oscillator model.}
+    \caption*{The excitatory driving force $P$ and time constants $\tau_e$ and $\tau_i$ are inferred during our experimentation, and their initial values are shown here. All default values are set such that small inputs would cause the system to oscillate (near the Hopf bifurcation point).}
     \begin{tabular}{lll}
     \toprule
     \cmidrule(r){1-2}
@@ -190,18 +192,19 @@ A broadband frequency spectrum contains a mixture of both a periodic component, 
 \end{figure}
 
 \begin{figure}[htbp]
-	\captionsetup{labelformat=empty}
-    \centering
-    \includegraphics[width=\textwidth]{../figures/chapter3/network_c5_fits.png}
-    \caption{}
-\end{figure}
-\begin{figure}
-\captionsetup{justification=centerlast,labelformat=adja-page}
-	\ContinuedFloat
     \caption{Network Wilson Cowan model sampling results for one representative subject.}
     \caption*{Top row shows the results for coherence maximum likelihood sampling, broadband AEC sampling in the middle, and bottom row shows the results for narrowband AEC maximum likelihood sampling. Left column shows the sampled posterior distributions for the global coupling parameter $c_5$, with the sampled mean and 95\% confidence intervals displayed. The middle column shows the network model simulated FC matrices with the posterior mean, and right column shows the scatter plot and linear regression line for the FC matrix entries. Both parameter posteriors achieved near zero slope for the linear fit.}
     \label{fig:networkc5}
 \end{figure}
+\clearpage
+\begin{figure}[h!]
+	\ContinuedFloat
+	\captionsetup{labelformat=adja-page}
+    \centering
+    \includegraphics[width=\textwidth]{../figures/chapter3/network_c5_fits.png}
+    \caption{}
+\end{figure}
+
 
 \subsection{Network Model Performance}
 Existing literature expanding neural mass models to the network level fixes the local parameters of neural masses ($c_1$, $c_2$, $c_3$, and $c_4$) to be equal at all nodes in the network. Hence these identical oscillators can only produce diverse dynamics because of noisy input, heterogeneous connectome coupling and concomitant delays. For fMRI modeling, a Balloon-Windkessel hemodynamic model \cite{buxton_dynamics_1998, friston_nonlinear_2000} is usually layered on top of the NMMs for parameter optimization (For example, see \cite{Zimmermann2018}). This adds another set of model parameters and abstractions to describing observed functional phenomenon with mean field models. On the other hand, encephalography based modeling wraps another metric on top of the NMM outputs, such as kuramoto coupling parameters in \cite{Deco2009}.  Here we will focus on the Wilson-Cowan model only, examining whether they are good basis for network mdoeling.

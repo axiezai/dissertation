@@ -8,9 +8,9 @@
 
 \begin{table}[htbp]
 \centering
-\includegraphics[width=0.85\linewidth]{../figures/supplements/pvals.png}
 \caption{Statistical comparison between HCP connectome and random connectome with Pearson's correlation.}
 \caption*{$P$-values table from random connectome comparisons of leading eigenmodes. Z-score distributions of spatial correlation (Pearson's) were created from 1000 sets of complex Laplace eigenmodes of  $C_{random}^{*}(D_{random})$ and $C_{HCP}^{*}(D_{random})$ random connectomes. For all canonical networks' similarity comparisons, a 95\% confidence interval of the Z-scores distributions were obtained and used to compute the $P$-values shown in the tables.}
+\includegraphics[width=0.85\linewidth]{../figures/supplements/pvals.png}
 \label{tab:S1}
 \end{table}
 
@@ -23,9 +23,9 @@
 
 \begin{table}[ht!]
 \centering
-\includegraphics[width=0.85\linewidth]{../figures/supplements/spearman_pvals.png}
 \caption{Statistical comparison between HCP connectome and random connectome with Spearman's correlation.}
 \caption*{$P$-values table from random connectome comparisons of leading eigenmodes. This table is produced the same way as Table S1, but the Z-score distributions were computed from Spearman's correlation}
+\includegraphics[width=0.85\linewidth]{../figures/supplements/spearman_pvals.png}
 \label{tab:S2}
 \end{table}
 
@@ -39,11 +39,19 @@
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[scale=0.6]{../figures/chapter3/c5_behavior.png}
     \caption{Network model behavior in response to global coupling.}
     \caption*{Panels showing network model's time course, frequency spectrum, and coherence functional connectivity from top to bottom with increasing global coupling parameter $c_5$. Simulations are performed with default parameter values and external driving force right at the Hopf bifurcation point so that oscillatory activity is mainly driven by $c_5$ ($P ~= 1.1$). The model's time course and frequency spectrum has the same dominant frequency and does not shift as $c_5$ is increased. However, the coherence FC matrices starts as saturated but changes to more a more sparse matrix as $c_5$ is increased. The example time course is shown for one brain region only, whereas the frequency spectrum is shown for all brain regions.}
     \label{fig:c5_behavior}
 \end{figure}
+\clearpage
+\begin{figure}
+	\centering
+	\captionsetup{labelformat=adja-page}
+	\ContinuedFloat
+	\includegraphics[scale=0.6]{../figures/chapter3/c5_behavior.png}
+	\caption{}
+\end{figure}
+
 
 \begin{figure}[htbp]
     \centering
