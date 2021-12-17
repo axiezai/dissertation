@@ -624,8 +624,15 @@ profile of the eigenmodes, especially the peak frequencies, are
 sensitive to the choice of model parameters as demonstrated below.
 
 \begin{figure}[htbp]
+	\captionsetup{labelformat=empty}
     \centering
     \includegraphics[scale=0.81]{../figures/chapter5/fig2_conn_spectra.png}
+    \caption{}
+\end{figure}
+\clearpage
+\begin{figure}
+	\captionsetup{labelformat=adja-page}
+	\ContinuedFloat
     \caption{Spectral graph model spectra for one subject.}
     \caption*{Top-Source localized MEG power spectrum for 68 parcellated brain regions. Estimated spectra for each brain region are shown in blue, and average spectrum across all regions is shown in black. The subsequent rows show each eigenmode's spectral magnitude response with model parameters optimized to match the MEG spectrum $(\tau_e = 0.0073, \tau_i = 0.0085, \tau_G = 0.0061, g_{ei} = 2.9469, g_{ii} = 4.4865, v = 18.3071, and \alpha = 0.4639)$. Left column shows each eigenmode's frequency responses, while the right column shows the same information as heatmaps. (a) Model using  subject's individual structural connectome. (b) Model using average template connectome obtained from 80 HCP subjects. (c) Model using uniform connectivity matrix of ones. (d) Model using randomized connectivity matrix with 75\% sparsity. (f) Model using randomized connectivity matrix with 95\% sparsity.}
     \label{fig:conn_spectra}
@@ -762,7 +769,7 @@ R between the \emph{regional distribution} of empirical MEG and
 model-predicted power within a given frequency band.
 
 \subsubsection{Small number of eigenmodes capture spatial distributions of
-alpha and beta band activity}.
+alpha and beta band activity}
 
 \begin{figure}[htbp]
     \centering

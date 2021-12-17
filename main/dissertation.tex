@@ -28,9 +28,13 @@
 \usepackage{array} % for flexible tables
 \usepackage{hyperref} % for links
 \usepackage{amsbsy} % for bold
-\usepackage{caption}
+\usepackage[justification=centerlast]{caption}
 \usepackage{indentfirst} % indent first paragraph after \section tags
 \usepackage{booktabs} % for tables
+\usepackage[all]{nowidow} % for dumb shit
+% For multi-page figures and captions:
+\DeclareCaptionLabelFormat{adja-page}{\hrulefill\\#1 #2 \emph{(previous page)}}
+
 
 %if you're having problems with overfull boxes, you may need to increase
 %the tolerance to 9999
@@ -46,7 +50,7 @@
 
 \title{Model Based Analysis of Multimodal Neuroimaging: From Neural Masses to Spectral Graph Theory}
 \author {Xihe Xie}
-\conferraldate {November}{2021}
+\conferraldate {December}{2021}
 \degreefield {Ph.D.}
 \copyrightholder{Xihe Xie}
 \copyrightyear{2021}

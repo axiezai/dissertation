@@ -59,6 +59,7 @@ To construct high resolution average connectivity matrices with the same Desikan
 
 \begin{figure}[ht]
     \centering
+    \captionsetup{justification=centerlast}
     \includegraphics[width=\textwidth]{../figures/chapter3/oscillator_full_10hz.png}
     \caption{MCMC sampling of posterior distribution when maximizing likelihood to average MEG power spectrum ($L_{\textrm{PSD}}$).}
     \caption*{Corner plot of the posterior marginal distributions for parameters $\tau_e$, $\tau_i$, and $P$ when initiating from default values (\textbf{A}) or Hopf bifurcation point (\textbf{B}) showing the probability densities of accepted parameter samples. The mean, and bounds for 95\% confidence intervals are shown on top of each column for each parameter. \textbf{C} and \textbf{D} illustrates the average MEG spectrum (green) alongside the oscillator model spectra (blue) simulated with the posterior mean values shown from the corner plots above.}
@@ -169,6 +170,7 @@ These results highlight two different problems in inference: the inability to es
 
 \begin{figure}
     \centering
+    \captionsetup{justification=centerlast}
     \includegraphics[width=\textwidth]{../figures/chapter3/oscillator_periodic_10hz.png}
    \caption{MCMC sampling of posterior distribution when maximizing likelihood to average periodic power spectrum ($L_{\textrm{PSD}}$).}
     \caption*{Corner plot of the posterior distributions for parameters $\tau_e$, $\tau_i$, and $P$ when initiating from default values (\textbf{A}) or Hopf bifurcation point (\textbf{B}) showing the probability densities of accepted parameter samples. \textbf{C} and \textbf{D} illustrates the average MEG spectrum (green) alongside the oscillator model spectra (blue) simulated with the posterior mean values shown from the corner plots above.}
@@ -188,8 +190,14 @@ A broadband frequency spectrum contains a mixture of both a periodic component, 
 \end{figure}
 
 \begin{figure}[htbp]
+	\captionsetup{labelformat=empty}
     \centering
     \includegraphics[width=\textwidth]{../figures/chapter3/network_c5_fits.png}
+    \caption{}
+\end{figure}
+\begin{figure}
+\captionsetup{justification=centerlast,labelformat=adja-page}
+	\ContinuedFloat
     \caption{Network Wilson Cowan model sampling results for one representative subject.}
     \caption*{Top row shows the results for coherence maximum likelihood sampling, broadband AEC sampling in the middle, and bottom row shows the results for narrowband AEC maximum likelihood sampling. Left column shows the sampled posterior distributions for the global coupling parameter $c_5$, with the sampled mean and 95\% confidence intervals displayed. The middle column shows the network model simulated FC matrices with the posterior mean, and right column shows the scatter plot and linear regression line for the FC matrix entries. Both parameter posteriors achieved near zero slope for the linear fit.}
     \label{fig:networkc5}
@@ -203,6 +211,7 @@ First we demonstrate the effect of external driving force $P$ on the networked m
 
 \begin{figure}[htbp]
     \centering
+    \captionsetup{justification=centerlast}
     \includegraphics[width=\textwidth]{../figures/chapter3/individual_c5_spectra.png}
     \caption{Comparison between MEG spectra and network model simulated spectra for 4 subjects.}
     \caption*{Model simulated spectra were computed with the posterior mean for global coupling parameter $c_5$ after MCMC sampling. The average spectra from all cortical brain regions is shown as lines, and the standard deviation summarized from all regions is shown as shaded fillings. Source localized MEG spectra is shown in blue, coherence parameter simulated spectra is shown in red, narrowband and broadband AEC parameter simulated spectra are shown in black and green respectively. All spectras were normalized by their minimum and maximum values to be between 0 and 1 for equal visualization scale.}
@@ -227,6 +236,7 @@ Similarly, Figure \ref{fig:aec_hopf} shows the same failure of samplers escaping
 
 \begin{figure}[htbp]
     \centering
+    \captionsetup{justification=centerlast}
     \includegraphics[width=\textwidth]{../figures/chapter3/individual_hopf_spectra.png}
    \caption{Comparison between MEG spectra and posterior mean global parameters simulated spectra for 4 subjects.}
     \caption*{Model simulated spectra were computed with the posterior means for ${\tau_e, \tau_i, c_5, P}$ after MCMC sampling. The average spectra from all cortical brain regions is shown as lines, and the standard deviation summarized from all regions is shown as shaded fillings. Source localized MEG spectra is shown in blue, coherence parameters simulated spectra is shown in red, narrowband and broadbanc AEC parameters simulated spectra is shown in black and green respectively. All spectras were normalized by their minimum and maximum values to be between 0 and 1 for equal visualization scale.}
