@@ -3,6 +3,8 @@ Model based analysis of multimodal neuroimaging: from neural masses to spectral 
 
 The PDF file viewable at `main/dissertation.pdf`.
 
+Students are welcomed to look at each tex file and use the main documents as a template for their own thesis. Hopefully this saves you from hours of formatting and reading some awful formatting requirements document.
+
 ### How to compile:
 I recommend downloading TexMaker or installing LaTeX workshop extension with VSCode, then compiling the `dissertation.tex` file. Note that if you've never used LaTeX before and don't have any LaTeX compilers installed, you'd need to do so in addition to the editors. 
 
