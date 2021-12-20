@@ -116,7 +116,7 @@ We show here that a graph-spectral decomposition is possible at all
 frequencies, ignoring non-linearities that are operating at the local
 (node) level. Like previous NMMs, we lump neural populations at each
 brain region into neural masses, but unlike them we use a linearized
-(but frequency-rich) local model -- see \textbf{Figure 1A}. The
+(but frequency-rich) local model -- see \textbf{Figure \ref{fig:sgmodel}}. The
 macroscopic connectome imposes a linear and deterministic modulation of
 these local signals, which can be captured by a \emph{network transfer
 function}. The sequestration of local oscillatory dynamics from the
@@ -126,9 +126,9 @@ the eigen-basis expansion of the network Laplacian. As far as we know,
 this is the first closed-form analytical model of frequency-rich brain
 activity constrained by the structural connectome.
 
-
+\clearpage
 \begin{figure}[htbp]
-	\caption{The linearized  spectral graph model.}
+	\caption{The linearized spectral graph model.}
     \caption*{(a) Conventional neural mass models instantiate a large assembly of excitatory and inhibitory neurons, which are modeled as fully connected internally. External inputs and outputs are gated through the excitatory neurons only, and inhibitory neurons are considered strictly local. The proposed linear model condenses these local assemblies into lumped linear systems $f_{e}(t)$ and $f_{i}(t)$, Gamma-shaped functions having time constants $\tau_e$ and $\tau_i$ (see panel (b)). The recurrent architecture of the two pools within a local area is captured by the gain terms $g_{ee}$, $g_{ii}$, $g_{ei}$, parameterizing the recurrents within excitatory, inhibitory and cross-populations. (c) The absolute value of eigenvalues of the complex Laplacian $\bm{\mathcal{L}}(\omega)$ are plotted against the eigenvector index. Each dot represents one eigenvalue  $\lambda(\omega)$; its color represents the frequency $\omega$ - low (blue) to high (yellow). These eigenvalues change by frequency; small eigenvalues change more compared to large ones. (d) Frequency response of each eigenmode plotted on the complex plane with default model parameters and a template structural connectome. Each curve represents the transit in the complex plane of a single eigenmode's frequency response, starting at low frequencies in the bottom right quadrant, and moving to the upper left quadrant at high frequencies. The magnitude of the response, given by the distance from the origin, suggests that most eigenmodes have two prominent lobes, roughly corresponding to lower frequency alpha rhythms and higher frequency gamma rhythms. In contrast, the lowest eigenmodes start off far from the origin, indicative of a low-pass response. (e) Magnitude of the frequency response of each eigenmode reinforces these impressions more clearly, with clear alpha peak, as well as slower rhythms. (f) The spatial patterns of the top 5 eigenmodes of $\bm{\mathcal{L}}(\omega)$, evaluated at the alpha frequency. The first 5 eigenmodes $\bm{u}_1 ... \bm{u}_5$ produce resting-state functional networks patterns; These patterns are not exclusive and greatly depend on the frequency,  model parameters, and the connectome.}
     \label{fig:sgmodel}
 \end{figure}
@@ -642,6 +642,7 @@ on the frequency at which they are evaluated, as well as the model
 parameters. Higher eigenmodes are especially sensitive to axonal
 velocity and frequency (not shown here).
 
+\clearpage
 \begin{figure}[htbp]
 	\caption{Spectral graph model spectra for one subject.}
     \caption*{Top-Source localized MEG power spectrum for 68 parcellated brain regions. Estimated spectra for each brain region are shown in blue, and average spectrum across all regions is shown in black. The subsequent rows show each eigenmode's spectral magnitude response with model parameters optimized to match the MEG spectrum $(\tau_e = 0.0073, \tau_i = 0.0085, \tau_G = 0.0061, g_{ei} = 2.9469, g_{ii} = 4.4865, v = 18.3071, and \alpha = 0.4639)$. Left column shows each eigenmode's frequency responses, while the right column shows the same information as heatmaps. (a) Model using  subject's individual structural connectome. (b) Model using average template connectome obtained from 80 HCP subjects. (c) Model using uniform connectivity matrix of ones. (d) Model using randomized connectivity matrix with 75\% sparsity. (f) Model using randomized connectivity matrix with 95\% sparsity.}
