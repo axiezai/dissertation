@@ -17,6 +17,7 @@ I recommend downloading TexMaker or installing LaTeX workshop extension with VSC
  - For long figures or captions that span more than one page:
     - First delcare a new command to label the figure as ***Continued***: `\DeclareCaptionLabelFormat{adja-page}{\hrulefill\\#1 #2 \emph{(Continued)}}`
     - For the large figure, declare 2 figure environments, and use `\ContinuedFloat` and `\captionsetup{labelformat=adja-page}` for continuation. 
+    - Make sure the figure caption is alone with no other text with `\clearpage` before and after inserting the caption.
 
 ### How to create slides with jupyter:
 Install [rise](https://rise.readthedocs.io). This only works with `jupyter notebook` right now, and is not compatible with `jupyter lab`.
