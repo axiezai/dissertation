@@ -31,6 +31,7 @@ Notice all files are placed with relative paths (ex: `../chapter1/introduction` 
     - First delcare a new command to label the figure as ***Continued***: `\DeclareCaptionLabelFormat{adja-page}{\hrulefill\\#1 #2 \emph{(Continued)}}`
     - For the large figure, declare 2 figure environments, and use `\ContinuedFloat` and `\captionsetup{labelformat=adja-page}` for continuation. 
     - Make sure the figure caption is alone with no other text with `\clearpage` before and after inserting the caption.
+    - The second figure environment's caption should be `\caption[]{}` to avoid an empty caption being added to the figures list.
 
 These changes are already implemented in `main/dissertation.tex`, do not edit the preamble unless you know what you are doing, and you are certain your edits will still follow formatting guidelines.
 
