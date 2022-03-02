@@ -1,6 +1,8 @@
 # My PhD Dissertation
 Model based analysis of multimodal neuroimaging: from neural masses to spectral graph theory.
 
+![word-cloud](code/brain_thesis_wordcloud.png)
+
 The PDF file viewable at `main/dissertation.pdf`.
 
 Students are welcomed to look at each tex file and use the main documents as a template for their own thesis. Hopefully this saves you from hours of formatting and reading some awful formatting requirements document.
